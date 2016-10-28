@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 public class ServerStub {
 	String Prog_Name = "1";
-	String Prog_Version = "1";
+	String Prog_Version = "2";
 	int port = 0;
 	String filename = "";
 	private ServerSocket mServerSocket;
@@ -28,7 +28,7 @@ public class ServerStub {
 	public void start() {
 		System.out.println("Server: Created!");
 		connectToPortMapper();
-		
+
 		try {
 			// Create the server
 			mServerSocket = new ServerSocket(port);
@@ -36,11 +36,10 @@ public class ServerStub {
 			mExecutorService = Executors.newCachedThreadPool();
 			System.out.println("Server: Start server for services!");
 
-
 			// Start listening for connections. The program waits until some
 			// client connects to the socket.
 			System.out.println("Server: Start listening on port " + port + ".");
-			
+
 			while (true) {
 				// Wait for incoming connections
 				Socket socket = mServerSocket.accept();
@@ -99,8 +98,6 @@ public class ServerStub {
 			Socket mSocket = new Socket(server, port);
 			System.out.println("Server: Connect to Port Mapper");
 			// open input & output stream
-			// BufferedReader mBufferedReader = new BufferedReader(new
-			// InputStreamReader(mSocket.getInputStream()));
 			PrintWriter mPrintWriter = new PrintWriter(mSocket.getOutputStream(), true);
 
 			InetAddress addr = InetAddress.getLocalHost();
@@ -115,10 +112,10 @@ public class ServerStub {
 		}
 	}
 
-
-
 	public static void main(String[] args) {
-		String filename = "portmapper.txt";
+		// String path = "/afs/cs.pitt.edu/usr0/colinzhang/public/portmapper.txt";
+		String path = "";
+		String filename = path + "portmapper.txt";
 		int port = 15223;
 		ServerStub ss = new ServerStub(filename, port);
 		ss.start();

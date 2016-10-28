@@ -2,7 +2,8 @@ program SciLib {
     version 1 {
         int[] multiply (a int[], b int[]) = 1;
         int[] sort (a int[]) = 2;
-        int[] min (a int[]) = 3;
-        int[] max (a int[]) = 4;
-    } = 1
+        int min (a int[]) = 3;
+        int max (a int[]) = 4;
+        void test () = 5;
+    } = 2
 } = 1

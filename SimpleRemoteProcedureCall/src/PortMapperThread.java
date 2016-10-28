@@ -17,7 +17,7 @@ public class PortMapperThread implements Runnable {
 		this.mSocket = socket;
 		this.mapper = mapper;
 		mBufferedReader = new BufferedReader(new InputStreamReader(
-				socket.getInputStream()));
+				mSocket.getInputStream()));
 	}
 	
 	@Override

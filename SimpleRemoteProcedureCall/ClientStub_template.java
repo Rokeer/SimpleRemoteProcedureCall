@@ -11,10 +11,11 @@ import java.util.Hashtable;
 import java.util.Random;
 
 public class ClientStub implements HeaderInterface {
-	
-	private String filename = "portmapper.txt";
-	private String Prog_Name = "1";
-	private String Prog_Version = "1";
+	// pirvate String path = "/afs/cs.pitt.edu/usr0/colinzhang/public/portmapper.txt";
+	private String path = "";
+	private String filename = path + "portmapper.txt";
+	private String Prog_Name = "$Prog_Name$";
+	private String Prog_Version = "$Prog_Version$";
 	private String mStrMSG = "";
 	private String server = "";
 	private int port = 0;
@@ -88,9 +89,6 @@ public class ClientStub implements HeaderInterface {
 
 			mPrintWriter.flush();
 			mPrintWriter.println("c#" + Prog_Name + "@" + Prog_Version);
-			//System.out.println("Server: Send message to Port Mapper: " + "s#" + Prog_Name + "@" + Prog_Version + "#"
-			//		+ addr.getHostAddress() + ":" + this.port);
-			//System.out.println("Server: Bind to Port Mapper");
 			while (((mStrMSG = mBufferedReader.readLine()) != null)) {
 				mStrMSG = mStrMSG.trim();
 				if (mStrMSG.equals("0")){
@@ -105,9 +103,11 @@ public class ClientStub implements HeaderInterface {
 		}
 		return "";
 	}
+	
+$procedure_block$
 	@Override
-	public int add(int a, int b) {
-		int procedure = 1;
+	public $procedure_name$ {
+		int procedure = $procedure_id$;
 		String[] msgs = null;
 		Object result = null;
 		try {
@@ -118,8 +118,8 @@ public class ClientStub implements HeaderInterface {
 			}
 			transactions.put(transid+ip, 0);
 			mStrMSG = transid + ip + "," + Prog_Name + "," + Prog_Version + "," + procedure + ",";
-			mStrMSG = mStrMSG + ObjectUtil.toString(a) + ",";
-			mStrMSG = mStrMSG + ObjectUtil.toString(b);
+			$procedure_paras$
+			mStrMSG.substring(0, mStrMSG.length()-1);
 			PrintWriter mPrintWriter = new PrintWriter(mSocket.getOutputStream(), true);
 			BufferedReader mBufferedReader = new BufferedReader(new InputStreamReader(
 					mSocket.getInputStream()));
@@ -149,7 +149,9 @@ public class ClientStub implements HeaderInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return (int) result;
+		
+		$return$
 	}
+$procedure_block$
 
 }

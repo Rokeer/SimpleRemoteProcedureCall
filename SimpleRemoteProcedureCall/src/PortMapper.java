@@ -81,8 +81,9 @@ public class PortMapper {
 	}
 
 	public static void main(String[] args) {
-		//String filename = "/afs/cs.pitt.edu/usr0/colinzhang/public/portmapper.txt";
-		String filename = "portmapper.txt";
+		//String path = "/afs/cs.pitt.edu/usr0/colinzhang/public/portmapper.txt";
+		String path = "";
+		String filename = path + "portmapper.txt";
 		int port = 15222;
 		PortMapper pm = new PortMapper(filename, port);
 		pm.start();

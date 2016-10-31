@@ -53,8 +53,14 @@ public class PortMapperThread implements Runnable {
 						// there is server provide this service
 						mPrintWriter = new PrintWriter(
 								mSocket.getOutputStream(), true);
-						mPrintWriter.println(mapper.get(msgs[1]).get(0));
-						System.out.println("Port Mapper: Return server address: " + mapper.get(msgs[1]).get(0));
+						if (mapper.get(msgs[1]).size()>0){
+							mPrintWriter.println(mapper.get(msgs[1]).get(0));
+							System.out.println("Port Mapper: Return server address: " + mapper.get(msgs[1]).get(0));
+						} else {
+							mPrintWriter.println("0");
+							System.out.println("Port Mapper: There is no server provide this service, return 0");
+						}
+						
 					} else {
 						// there is no server provide this service
 						mPrintWriter = new PrintWriter(

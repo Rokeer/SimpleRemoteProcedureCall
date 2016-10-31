@@ -43,6 +43,7 @@ public class ServerThread implements Runnable, HeaderInterface {
 						case 0:
 							System.out.println("Server: Procedure " + procedure + " is executing");
 							result = result + "1";
+							break;
 						$cases$
 						default:
 							result = "0," + msgs[0];

@@ -38,7 +38,7 @@ public class PortMapper {
 			// Start listening for connections. The program waits until some
 			// client connects to the socket.
 			System.out.println("Port Mapper: Start listening on port " + port + ".");
-			
+			mExecutorService.execute(new PortMapperChecker(mapper));
 			while (true) {
 				// Wait for incoming connections
 				Socket socket = mServerSocket.accept();

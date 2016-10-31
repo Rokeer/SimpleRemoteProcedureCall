@@ -11,6 +11,7 @@ public class StubGenerator {
 	ArrayList<ArrayList<String>> procedures = new ArrayList<ArrayList<String>>();
 	String Prog_Name = "";
 	String Prog_Version = "";
+	String path = "templates/";
 
 	public StubGenerator() {
 
@@ -24,13 +25,13 @@ public class StubGenerator {
 		genServerStub();
 		genServerThread();
 		genServer();
-
+		genUtil();
 	}
 
 	public void genHeaderInterface() {
 		String text = "";
 		String file = "HeaderInterface";
-		String templateFile = file + "_template.java";
+		String templateFile = path + file + "_template.java";
 		String methods = "";
 		text = readTemplate(templateFile);
 		for (int i = 0; i < procedures.size(); i++) {
@@ -53,7 +54,7 @@ public class StubGenerator {
 	public void genClientStub() {
 		String text = "";
 		String file = "ClientStub";
-		String templateFile = file + "_template.java";
+		String templateFile = path + file + "_template.java";
 		text = readTemplate(templateFile);
 		text = text.replace("$Prog_Name$", Prog_Name);
 		text = text.replace("$Prog_Version$", Prog_Version);
@@ -109,7 +110,7 @@ public class StubGenerator {
 	public void genClient() {
 		String text = "";
 		String file = "Client";
-		String templateFile = file + "_template.java";
+		String templateFile = path + file + "_template.java";
 		text = readTemplate(templateFile);
 		writeTemplate(file + ".java", text);
 	}
@@ -117,7 +118,7 @@ public class StubGenerator {
 	public void genServerStub() {
 		String text = "";
 		String file = "ServerStub";
-		String templateFile = file + "_template.java";
+		String templateFile = path + file + "_template.java";
 		text = readTemplate(templateFile);
 		text = text.replace("$Prog_Name$", Prog_Name);
 		text = text.replace("$Prog_Version$", Prog_Version);
@@ -128,7 +129,7 @@ public class StubGenerator {
 	public void genServerThread() {
 		String text = "";
 		String file = "ServerThread";
-		String templateFile = file + "_template.java";
+		String templateFile = path + file + "_template.java";
 		String methods = "";
 		text = readTemplate(templateFile);
 		text = text.replace("$Prog_Name$", Prog_Name);
@@ -181,7 +182,7 @@ public class StubGenerator {
 	public void genServer() {
 		String text = "";
 		String file = "Server";
-		String templateFile = file + "_template.java";
+		String templateFile = path + file + "_template.java";
 		String methods = "";
 		text = readTemplate(templateFile);
 		for (int i = 0; i < procedures.size(); i++) {
@@ -197,6 +198,15 @@ public class StubGenerator {
 		}
 		methods = methods.substring(0, methods.length() - 3);
 		text = text.replace("$methods$", methods);
+		System.out.println(text);
+		writeTemplate(file + ".java", text);
+	}
+	
+	public void genUtil() {
+		String text = "";
+		String file = "ObjectUtil";
+		String templateFile = path + file + "_template.java";
+		text = readTemplate(templateFile);
 		System.out.println(text);
 		writeTemplate(file + ".java", text);
 	}

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Server implements HeaderInterface {
 	
@@ -7,12 +8,17 @@ public class Server implements HeaderInterface {
 
 	@Override
 	public int[] multiply(int[] a, int[] b){
-		return b;
+		int[] result = new int[a.length];
+		for (int i = 0; i < a.length; i++) {
+			result[i] = a[i] * b[i];
+		}
+		return result;
 		
 	}
 
 	@Override
 	public int[] sort(int[] a){
+		Arrays.sort(a);
 		return a;
 		
 	}

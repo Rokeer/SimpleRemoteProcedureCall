@@ -23,6 +23,11 @@ public class ClientStub implements HeaderInterface {
 	private Hashtable<String, Integer> transactions = new Hashtable<String, Integer>();
 	private String ip = "";
 	public ClientStub() {
+		getServerInfo();
+		
+	}
+	
+	private void getServerInfo () {
 		String[] serverInfo = connectToPortMapper().split(":");
 		if (serverInfo[0].equals("0")){
 			System.out.println("There is no server providing this service");
@@ -38,18 +43,24 @@ public class ClientStub implements HeaderInterface {
 			}
 			ip = addr.getHostAddress();
 		}
-		
 	}
 	
 	private Socket connectToServer() {
 		Socket mSocket = null;
-		try {
-			// Create the server
-			mSocket = new Socket(server, port);
-			
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
+		int count = 0;
+		while (mSocket == null && count < 3){
+			try {
+				// Create the server
+				mSocket = new Socket(server, port);
+				
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+				getServerInfo ();
+				mSocket = null;
+				count ++;
+			}
 		}
+		
 		return mSocket;
 	}
 

@@ -23,6 +23,11 @@ public class ClientStub implements HeaderInterface {
 	private Hashtable<String, Integer> transactions = new Hashtable<String, Integer>();
 	private String ip = "";
 	public ClientStub() {
+		getServerInfo();
+		
+	}
+	
+	private void getServerInfo () {
 		String[] serverInfo = connectToPortMapper().split(":");
 		if (serverInfo[0].equals("0")){
 			System.out.println("There is no server providing this service");
@@ -38,19 +43,24 @@ public class ClientStub implements HeaderInterface {
 			}
 			ip = addr.getHostAddress();
 		}
-		
-		
 	}
 	
 	private Socket connectToServer() {
 		Socket mSocket = null;
-		try {
-			// Create the server
-			mSocket = new Socket(server, port);
-			
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
+		int count = 0;
+		while (mSocket == null && count < 3){
+			try {
+				// Create the server
+				mSocket = new Socket(server, port);
+				
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+				getServerInfo ();
+				mSocket = null;
+				count ++;
+			}
 		}
+		
 		return mSocket;
 	}
 
@@ -103,6 +113,7 @@ public class ClientStub implements HeaderInterface {
 				}
 				break;
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -111,7 +122,7 @@ public class ClientStub implements HeaderInterface {
 	
 
 	@Override
-	public int[] multiply(int[] a, int[] b) {
+	public int[][] multiply(int[][] a, int[][] b) {
 		int procedure = 1;
 		String[] msgs = null;
 		Object result = null;
@@ -156,7 +167,7 @@ public class ClientStub implements HeaderInterface {
 			e.printStackTrace();
 		}
 		
-		return (int[]) result;
+		return (int[][]) result;
 	}
 
 

@@ -1,7 +1,7 @@
 
 public interface HeaderInterface {
 	
-	int[] multiply(int[] a, int[] b);
+	int[][] multiply(int[][] a, int[][] b);
 
 	int[] sort(int[] a);
 

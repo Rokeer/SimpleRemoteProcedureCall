@@ -17,7 +17,7 @@ public class PortMapperChecker implements Runnable {
 	public void run() {
 		try {
 			while (true){
-				Thread.sleep(1000);
+				Thread.sleep(60000);
 				BufferedReader br = null;
 				PrintWriter pw = null;
 				for (String key : mapper.keySet()) {

@@ -2,23 +2,32 @@
 public class Client {
 
 	public static void main(String[] args) {
-		int[] a = new int[4];
-		int[] b = new int[4];
+		int[][] a={{1,2},{3,4},{5,6}};
+        int[][] b={{1,2,3},{4,5,6}};
+		
+		int[] c = new int[4];
 		for (int i = 0; i < 4; i++) {
-			a[i] = 4 - i;
-			b[i] = (i+1)*2;
+			c[i] = (i+1)*2;
 		}
+		
+		
 		ClientStub cs = new ClientStub();
-		int[] c = cs.multiply(a, b);
-		for (int i = 0; i < c.length; i++) {
+		int[][] d = cs.multiply(a, b);
+		for(int i = 0;i<d.length;i++)  
+        {  
+            for(int j = 0;j<d[0].length;j++)  
+            {  
+                System.out.print(d[i][j]+"\t");  
+            }  
+            System.out.println();  
+        }  
+		
+		int[] e = cs.sort(c);
+		for (int i = 0; i < e.length; i++) {
 			System.out.println(c[i]);
 		}
-		int[] d = cs.sort(a);
-		for (int i = 0; i < d.length; i++) {
-			System.out.println(d[i]);
-		}
-		System.out.println(cs.max(a));
-		System.out.println(cs.min(b));
+		System.out.println(cs.max(c));
+		System.out.println(cs.min(c));
 		cs.test();
 	}
 	

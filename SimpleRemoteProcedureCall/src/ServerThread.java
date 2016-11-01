@@ -47,8 +47,8 @@ public class ServerThread implements Runnable, HeaderInterface {
 						case 1:
 							try {
 								System.out.println("Server: Procedure " + procedure + " is executing");
-								int[] a = (int[]) ObjectUtil.fromString(msgs[4]);
-								int[] b = (int[]) ObjectUtil.fromString(msgs[5]);
+								int[][] a = (int[][]) ObjectUtil.fromString(msgs[4]);
+								int[][] b = (int[][]) ObjectUtil.fromString(msgs[5]);
 								result = result + ObjectUtil.toString(multiply(a, b));
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -119,7 +119,7 @@ public class ServerThread implements Runnable, HeaderInterface {
 	}
 	
 	@Override
-	public int[] multiply(int[] a, int[] b){
+	public int[][] multiply(int[][] a, int[][] b){
 		return s.multiply(a, b);
 	}
 

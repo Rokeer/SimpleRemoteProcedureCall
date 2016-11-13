@@ -6,7 +6,7 @@ public class Server implements HeaderInterface {
 	}
 
 	@Override
-	public int[] multiply(int[] a, int[] b){
+	public int[][] multiply(int[][] a, int[][] b){
 		
 	}
 

@@ -11,8 +11,8 @@ import java.util.Hashtable;
 import java.util.Random;
 
 public class ClientStub implements HeaderInterface {
-	// pirvate String path = "/afs/cs.pitt.edu/usr0/colinzhang/public/portmapper.txt";
-	private String path = "";
+	private String path = "/afs/cs.pitt.edu/usr0/colinzhang/public/Prj1HaoranZhang/";
+	//private String path = "";
 	private String filename = path + "portmapper.txt";
 	private String Prog_Name = "1";
 	private String Prog_Version = "2";
@@ -23,29 +23,44 @@ public class ClientStub implements HeaderInterface {
 	private Hashtable<String, Integer> transactions = new Hashtable<String, Integer>();
 	private String ip = "";
 	public ClientStub() {
-		String[] serverInfo = connectToPortMapper().split(":");
-		server = serverInfo[0];
-		port = Integer.parseInt(serverInfo[1]);
-		InetAddress addr = null;
-		try {
-			addr = InetAddress.getLocalHost();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ip = addr.getHostAddress();
+		getServerInfo();
 		
+	}
+	
+	private void getServerInfo () {
+		String[] serverInfo = connectToPortMapper().split(":");
+		if (serverInfo[0].equals("0")){
+			System.out.println("There is no server providing this service");
+		} else {
+			server = serverInfo[0];
+			port = Integer.parseInt(serverInfo[1]);
+			InetAddress addr = null;
+			try {
+				addr = InetAddress.getLocalHost();
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ip = addr.getHostAddress();
+		}
 	}
 	
 	private Socket connectToServer() {
 		Socket mSocket = null;
-		try {
-			// Create the server
-			mSocket = new Socket(server, port);
-			
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
+		int count = 0;
+		while (mSocket == null && count < 3){
+			try {
+				// Create the server
+				mSocket = new Socket(server, port);
+				
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+				getServerInfo ();
+				mSocket = null;
+				count ++;
+			}
 		}
+		
 		return mSocket;
 	}
 
@@ -106,7 +121,7 @@ public class ClientStub implements HeaderInterface {
 	
 
 	@Override
-	public int[] multiply(int[] a, int[] b) {
+	public int[][] multiply(int[][] a, int[][] b) {
 		int procedure = 1;
 		String[] msgs = null;
 		Object result = null;
@@ -136,7 +151,10 @@ public class ClientStub implements HeaderInterface {
 				
 				if (transactions.containsKey(msgs[1])){
 					transactions.remove(msgs[1]);
-					result = ObjectUtil.fromString(msgs[2]);
+					if (msgs.length == 3) {
+						result = ObjectUtil.fromString(msgs[2]);
+					}
+					
 				}
 				
 				break;
@@ -151,7 +169,7 @@ public class ClientStub implements HeaderInterface {
 			e.printStackTrace();
 		}
 		
-		return (int[]) result;
+		return (int[][]) result;
 	}
 
 
@@ -185,7 +203,10 @@ public class ClientStub implements HeaderInterface {
 				
 				if (transactions.containsKey(msgs[1])){
 					transactions.remove(msgs[1]);
-					result = ObjectUtil.fromString(msgs[2]);
+					if (msgs.length == 3) {
+						result = ObjectUtil.fromString(msgs[2]);
+					}
+					
 				}
 				
 				break;
@@ -234,7 +255,10 @@ public class ClientStub implements HeaderInterface {
 				
 				if (transactions.containsKey(msgs[1])){
 					transactions.remove(msgs[1]);
-					result = ObjectUtil.fromString(msgs[2]);
+					if (msgs.length == 3) {
+						result = ObjectUtil.fromString(msgs[2]);
+					}
+					
 				}
 				
 				break;
@@ -283,7 +307,10 @@ public class ClientStub implements HeaderInterface {
 				
 				if (transactions.containsKey(msgs[1])){
 					transactions.remove(msgs[1]);
-					result = ObjectUtil.fromString(msgs[2]);
+					if (msgs.length == 3) {
+						result = ObjectUtil.fromString(msgs[2]);
+					}
+					
 				}
 				
 				break;
@@ -332,7 +359,10 @@ public class ClientStub implements HeaderInterface {
 				
 				if (transactions.containsKey(msgs[1])){
 					transactions.remove(msgs[1]);
-					result = ObjectUtil.fromString(msgs[2]);
+					if (msgs.length == 3) {
+						result = ObjectUtil.fromString(msgs[2]);
+					}
+					
 				}
 				
 				break;

@@ -29,6 +29,24 @@ public class Client {
 		System.out.println(cs.max(c));
 		System.out.println(cs.min(c));
 		cs.test();
+		
+		int[][] f = new int[1000][1000];
+		for(int i = 0;i<f.length;i++)  
+        {  
+            for(int j = 0;j<f[0].length;j++)  
+            {  
+            	f[i][j] = 0;
+            } 
+        } 
+		int[][] g = cs.multiply(f, f);
+		for(int i = 0;i<g.length;i++)  
+        {  
+            for(int j = 0;j<g[0].length;j++)  
+            {  
+                System.out.print(g[i][j]+"\t");  
+            }  
+            System.out.println();  
+        } 
 	}
 	
 }

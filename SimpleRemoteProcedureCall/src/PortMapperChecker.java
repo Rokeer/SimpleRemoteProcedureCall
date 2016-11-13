@@ -47,6 +47,7 @@ public class PortMapperChecker implements Runnable {
 							}
 						} catch (IOException e) {
 							e.printStackTrace();
+							System.out.println("Port Mapper: This server has problem, remove it from servers list");
 							al.remove(i);
 							i = i - 1;
 						}

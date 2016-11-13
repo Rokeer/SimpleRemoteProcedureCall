@@ -11,8 +11,8 @@ import java.util.Hashtable;
 import java.util.Random;
 
 public class ClientStub implements HeaderInterface {
-	// private String path = "/afs/cs.pitt.edu/usr0/colinzhang/public/portmapper.txt";
-	private String path = "";
+	private String path = "/afs/cs.pitt.edu/usr0/colinzhang/public/Prj1HaoranZhang/";
+	//private String path = "";
 	private String filename = path + "portmapper.txt";
 	private String Prog_Name = "$Prog_Name$";
 	private String Prog_Version = "$Prog_Version$";
